@@ -1,8 +1,7 @@
-> **Tech Challenge Fase 4 — `fiap-tc-fase4-oficina-database-infra`**
+> Documentação central da Challenge Fase 4 em: [fiap-tc-fase4-oficina-os-service](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service).
 >
-> Bancos de dados e filas da Saga, **um conjunto isolado por serviço**, em Terraform.
-
 # Oficina Fase 4 — Database Infra
+> Bancos de dados e filas da Saga, **um conjunto isolado por serviço**, em Terraform.
 
 ## 1. Objetivo de negócio
 
