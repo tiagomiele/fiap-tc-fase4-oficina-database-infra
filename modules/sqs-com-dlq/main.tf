@@ -1,3 +1,4 @@
+# Fase 4 - release 1.1
 resource "aws_sqs_queue" "dlq" {
   name                      = "${var.name}-dlq"
   message_retention_seconds = 1209600
