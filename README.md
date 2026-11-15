@@ -1,8 +1,7 @@
-> **Tech Challenge Fase 4 — `fiap-tc-fase4-oficina-database-infra`**
+> Documentação central da Challenge Fase 4 em: [fiap-tc-fase4-oficina-os-service](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service).
 >
-> Bancos de dados e filas da Saga, **um conjunto isolado por serviço**, em Terraform.
-
 # Oficina Fase 4 — Database Infra
+> Bancos de dados e filas da Saga, **um conjunto isolado por serviço**, em Terraform.
 
 ## 1. Objetivo de negócio
 
@@ -74,17 +73,15 @@ O perfil descartável (`-UseAwsAcademyDisposableProductionProfile`) é o usado n
 
 ## 5. Stack técnica
 
-| Área | Tecnologias |
-|---|---|
-| Bancos | Amazon RDS PostgreSQL 16 (2 instâncias) e Amazon DynamoDB |
-| Mensageria | Amazon SQS com DLQ e redrive |
-| Infraestrutura | Terraform ≥ 1.6, provider AWS, HCP Terraform (1 workspace por pasta e ambiente) |
-| Credenciais AWS | `LabRole` do AWS Academy; o repositório não declara IAM |
-| Telemetria | AWS Lambda Python, EventBridge (`rate(5 minutes)`), CloudWatch e New Relic Event API |
-| Schema SQL | Flyway nos próprios serviços (OS V1–V5, Orçamento e Pagamento V1) |
-| Qualidade | `terraform fmt/validate/test`, TFLint, testes Python (`unittest`) e `validate_docs.py` |
-| Segurança | Checkov, Trivy, Gitleaks e actionlint |
-| Automação | GitHub Actions, GitHub Environments e GitHub App para sincronizar outputs |
+- **Bancos de dados:** Amazon RDS PostgreSQL 16 (2 instâncias: OS e Orçamento e Pagamento) e Amazon DynamoDB (Diagnóstico e Reparo)
+- **Mensageria:** Amazon SQS, com DLQ e redrive
+- **Infraestrutura:** Terraform ≥ 1.6, provider AWS, HCP Terraform (1 workspace por pasta e ambiente)
+- **Credenciais AWS:** `LabRole` do AWS Academy; o repositório não declara IAM
+- **Telemetria:** AWS Lambda Python 3.12, EventBridge (`rate(5 minutes)`), CloudWatch e New Relic Event API
+- **Schema SQL:** Flyway nos próprios serviços (OS V1–V5, Orçamento e Pagamento V1)
+- **Testes:** `terraform fmt/validate/test`, testes Python (`unittest`) e `validate_docs.py`
+- **Qualidade e segurança:** TFLint, Checkov, Trivy, Gitleaks, actionlint
+- **CI/CD:** GitHub Actions, GitHub Environments e GitHub App para sincronizar outputs
 
 As tabelas SQL não são criadas aqui: cada serviço aplica as próprias migrations Flyway ao subir.
 
