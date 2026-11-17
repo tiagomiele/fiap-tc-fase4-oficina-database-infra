@@ -172,7 +172,7 @@ A senha da produção é diferente da senha da homologação: na conexão `ofici
 |---|---|---|
 | `namespace ... not found` | o ambiente de `$amb` não está no ar ou o `kubectl` aponta para outro cluster | confira `$amb` e `kubectl get ns` |
 | `timed out waiting for the condition` ou `pod is not running. Current status=Pending` | nodes cheios (`Too many pods`, `Insufficient cpu/memory`) ou download lento da imagem (`Pulling image`, `ErrImagePull`) | leia os *Events* que o bloco mostra; apague pods `Completed`/`Error` que sobraram (`kubectl get pods -A --field-selector=status.phase!=Running`) e rode o bloco de novo; se for a imagem, espere 1–2 min e rode de novo |
-| `Pending` e `kubectl get nodes` → `No resources found` | o cluster ficou sem nodes (o Lab parou as EC2) | siga a seção 21.2 do [Bootstrap da Fase 4](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service/blob/homolog/docs/bootstrap-aws-do-zero-fase4.md) com o `$amb` do ambiente e rode o bloco de novo |
+| `Pending` e `kubectl get nodes` → `No resources found` | o cluster ficou sem nodes (o Lab parou as EC2) | siga a seção 21.2 do [Bootstrap da Fase 4](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service/blob/main/docs-fase4/bootstrap-aws-do-zero-fase4.md) com o `$amb` do ambiente e rode o bloco de novo |
 | DBeaver: `password authentication failed for user` | senha antiga salva na conexão | copie a senha atual (acima) |
 | DBeaver: `Connection refused` / `Connection to localhost:<porta> refused` | conexão de outro ambiente selecionada, ou a janela do túnel foi fechada | selecione a conexão do ambiente do túnel; se a janela fechou, rode o bloco de novo |
 | `port-forward`: `address already in use` | outro túnel já usa a porta | feche a outra janela de túnel |
@@ -225,7 +225,7 @@ aws sqs list-queues --queue-name-prefix "oficina-$amb-" --query 'QueueUrls' --ou
   }
 ```
 
-Com a Saga saudável, as filas principais ficam perto de 0 e as DLQs em 0. **Isso é o esperado:** o consumidor apaga a mensagem da fila assim que a processa, e o SQS não guarda histórico. O conteúdo só fica guardado na DLQ (14 dias), quando a mensagem falha 5 vezes. Para ver depois o que passou pela Saga, use `mensagens_processadas` (6.1 e 6.2, pelo túnel da 6.3), o atributo `mensagensProcessadas` do DynamoDB (6.4) ou os logs do New Relic pelo `correlationId`. Para ver uma mensagem parada na fila, siga o cenário da seção 16.6 do [Bootstrap da Fase 4](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service/blob/homolog/docs/bootstrap-aws-do-zero-fase4.md).
+Com a Saga saudável, as filas principais ficam perto de 0 e as DLQs em 0. **Isso é o esperado:** o consumidor apaga a mensagem da fila assim que a processa, e o SQS não guarda histórico. O conteúdo só fica guardado na DLQ (14 dias), quando a mensagem falha 5 vezes. Para ver depois o que passou pela Saga, use `mensagens_processadas` (6.1 e 6.2, pelo túnel da 6.3), o atributo `mensagensProcessadas` do DynamoDB (6.4) ou os logs do New Relic pelo `correlationId`. Para ver uma mensagem parada na fila, siga o cenário da seção 16.6 do [Bootstrap da Fase 4](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service/blob/main/docs-fase4/bootstrap-aws-do-zero-fase4.md).
 
 **No console** (região **Estados Unidos (Oregon) us-west-2**):
 1. **Simple Queue Service** → menu da esquerda **Filas** → no campo de busca, `oficina-homolog-` (ou `oficina-production-`). Aparecem 3 filas principais e 3 `-dlq`.
@@ -278,7 +278,7 @@ Para conferir, de dentro de um pod, se a `LabRole` acessa as filas e a tabela: `
 
 ### 7.3 Destruir
 
-A destruição em ordem, para economizar créditos, é feita pelo `fiap-tc-fase4-oficina-os-service/scripts/destroy-environment.ps1`, descrito no Bootstrap da Fase 4.
+A destruição em ordem, para economizar créditos, é feita pelo `fiap-tc-fase4-oficina-os-service/scripts/destroy-environment.ps1`, descrito no [Bootstrap da Fase 4](https://github.com/tiagomiele/fiap-tc-fase4-oficina-os-service/blob/main/docs-fase4/bootstrap-aws-do-zero-fase4.md).
 
 ## 8. Variáveis principais
 
